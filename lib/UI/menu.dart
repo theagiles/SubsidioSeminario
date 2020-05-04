@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:gradient_bottom_navigation_bar/gradient_bottom_navigation_bar.dart';
-import 'package:subsidios/UI/estudiantes/registro_estudiantes.dart';
+import 'package:subsidios/UI/estudiantes/lista_estudiantes.dart';
 import 'package:subsidios/UI/home.dart';
 
 class MenuPage extends StatefulWidget {
@@ -14,10 +14,10 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
 
-  final RegistrostudiantePage _registro = new RegistrostudiantePage();
+  final ListaEstudiantePage _registro = ListaEstudiantePage();
   int _selectedIndex = 0;
 
-  Widget _homepage = new HomePage();
+  Widget _homepage = HomePage();
 
   Widget _pageChooser(int page){
     switch (page){
@@ -28,9 +28,9 @@ class _MenuPageState extends State<MenuPage> {
       return _registro;
       break;
       default:
-      return new Container(
-        child: new Center(
-          child: new Text('ingrese.'))
+      return Container(
+        child:  Center(
+          child: Text('ingrese.'))
       );
     }
   }

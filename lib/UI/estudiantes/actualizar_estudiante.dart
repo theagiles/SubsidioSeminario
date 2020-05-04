@@ -5,20 +5,23 @@ import 'package:subsidios/Model/estudiante.dart';
 import 'package:subsidios/navigator.dart';
 import 'package:subsidios/resource/constantes.dart';
 
-class RegistrostudiantePage extends StatefulWidget {
-  RegistrostudiantePage({Key key}) : super(key: key);
+class ActualizarEstudiantePage extends StatefulWidget {
+  final Estudiante estudiante;
+  const ActualizarEstudiantePage({Key key, this.estudiante}) : super(key: key);
 
   @override
-  _RegistrostudiantePageState createState() => _RegistrostudiantePageState();
+  _ActualizarEstudiantePageState createState() => _ActualizarEstudiantePageState(estudiante: estudiante);
 }
 
-class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
+class _ActualizarEstudiantePageState extends State<ActualizarEstudiantePage>
+    with SingleTickerProviderStateMixin {
+    _ActualizarEstudiantePageState({this.estudiante});
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _autovalidate = false;
   final EstudianteBloc estudianteBloc = EstudianteBloc();
   String selectedEstrato;
-  Estudiante _estudiante = Estudiante(
+  Estudiante estudiante = Estudiante(
     nombre: '',
     apellido: '',
     identificacion: '',
@@ -27,22 +30,21 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
     estrato: 0,
     email: '',
     password: ''
-  ); 
+  );
 
   @override
   void initState() {
     super.initState();
     EstudianteBloc();
   }
-
-  showRegisterDialog(BuildContext context) {
+  showUpdateDialog(BuildContext context) {
     showDialog(
         context: context,
         builder: (buildcontext) {
           return AlertDialog(
             title:
                 Row(children: [Icon(Icons.info), Text(Constants.tittleDialog)]),
-            content: Text(Constants.registroExitoso),
+            content: Text(Constants.actualizacion),
             actions: <Widget>[
               RaisedButton(
                 shape: RoundedRectangleBorder(
@@ -54,21 +56,22 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
                 ),
                 color: Color(0xFFD32F2F),
                 padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                onPressed: () {SubNavigator.goToListaEstudiante(context);},
+                onPressed: () {
+                  SubNavigator.goToListaEstudiante(context);
+                },
               )
             ],
           );
         });
   }
   void _handleSubmitted() {
-    print("estudiante a registrar + ${_estudiante.nombre}");
     final FormState form = _formKey.currentState;
     if (!form.validate()) {
       _autovalidate = true;
     } else {
       form.save();
-      estudianteBloc.createEstudiante(_estudiante);
-      showRegisterDialog(context);
+      estudianteBloc.createEstudiante(estudiante);
+      showUpdateDialog(context);
       
     }
   }
@@ -78,15 +81,13 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text(Constants.registro,)
-      ),
+        title: const Text(Constants.actualizar)),
       body: Stack(fit: StackFit.expand, children: <Widget>[
         Center(
           child: Container(
             child: Theme(
               data: ThemeData(
                   brightness: Brightness.light,
-                  hintColor: Colors.red,
                   inputDecorationTheme: InputDecorationTheme(
                     labelStyle: TextStyle(color: Colors.black, fontSize: 18.0),
                   )),
@@ -111,15 +112,14 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
                             decoration: InputDecoration(
                                 labelText: Constants.labelNombre,
                                 border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: BorderSide(color: Colors.red),
-                                    ),
+                                    borderRadius: BorderRadius.circular(20.0)),
                                 icon: Icon(Icons.person_outline)),
                             textCapitalization: TextCapitalization.sentences,
+                            initialValue: estudiante.nombre,
                             validator: validateName,
                             keyboardType: TextInputType.text,
                             onSaved: (String value) {
-                              _estudiante.nombre = value.trim();
+                              estudiante.nombre = value.trim();
                             },
                             style: TextStyle(fontSize: 18.0),
                           ),
@@ -133,27 +133,11 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
                                     borderRadius: BorderRadius.circular(20.0)),
                                 icon: Icon(Icons.person_outline)),
                             textCapitalization: TextCapitalization.sentences,
+                            initialValue: estudiante.apellido,
                             validator: validateName,
                             keyboardType: TextInputType.text,
                             onSaved: (String value) {
-                              _estudiante.apellido = value.trim();
-                            },
-                            style: TextStyle(fontSize: 18.0),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20.0),
-                          ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                                labelText: Constants.labelDocumento,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0)),
-                                icon: Icon(Icons.create)),
-                                maxLength: 10,
-                            validator: validateNumeros,
-                            keyboardType: TextInputType.number,
-                            onSaved: (String value) {
-                              _estudiante.identificacion = value;
+                              estudiante.apellido = value.trim();
                             },
                             style: TextStyle(fontSize: 18.0),
                           ),
@@ -168,9 +152,10 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
                                 icon: Icon(Icons.event_available)),
                             maxLength: 2,
                             validator: validateNumeros,
+                            initialValue: estudiante.grado.toString(),
                             keyboardType: TextInputType.number,
                             onSaved: (String value) {
-                              _estudiante.grado = int.parse(value);
+                              estudiante.grado = int.parse(value);
                             },
                             style: TextStyle(fontSize: 18.0),
                           ),
@@ -184,10 +169,11 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
                                     borderRadius: BorderRadius.circular(20.0)),
                                 icon: Icon(Icons.location_on)),
                             textCapitalization: TextCapitalization.sentences,
+                            initialValue: estudiante.barrio,
                             validator: validateName,
                             keyboardType: TextInputType.text,
                             onSaved: (String value) {
-                              _estudiante.barrio = value.trim();
+                              estudiante.barrio = value.trim();
                             },
                             style: TextStyle(fontSize: 18.0),
                           ),
@@ -200,28 +186,11 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0)),
                                 icon: Icon(Icons.person)),
+                                initialValue: estudiante.email,
                             validator: validateEmail,
                             keyboardType: TextInputType.emailAddress,
                             onSaved: (String value) {
-                              _estudiante.email = value;
-                            },
-                            style: TextStyle(fontSize: 18.0),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20.0),
-                          ),
-                          TextFormField(
-                            obscureText: true,
-                            autocorrect: false,
-                            decoration: InputDecoration(
-                                labelText: Constants.labelPassword,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0)),
-                                icon: Icon(Icons.lock)),
-                            maxLength: 8,
-                            keyboardType: TextInputType.text,
-                            onSaved: (String value) {
-                              _estudiante.password = value;
+                              estudiante.email = value;
                             },
                             style: TextStyle(fontSize: 18.0),
                           ),
@@ -231,7 +200,7 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
                           DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
                               hint: Text("Estrato"),
-                              value: selectedEstrato,
+                              value: estudiante.estrato.toString(),
                               icon: Icon(Icons.arrow_downward),
                               iconSize: 24,
                               elevation: 16,
@@ -244,9 +213,9 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
                               ),
                               onChanged: (String newValue) {
                                 setState(() {
-                                  selectedEstrato = newValue;
-                                  print(_estudiante.estrato=int.parse(selectedEstrato));
-                                  _estudiante.estrato=int.parse(selectedEstrato);
+                                  estudiante.estrato=int.parse(newValue);
+                                  print(estudiante.estrato=int.parse(newValue));
+                                  estudiante.estrato=int.parse(newValue);
                                 });
                               },
                               items: <String>["1"," 2", "3"," 4", "5", "6"]
@@ -260,7 +229,7 @@ class _RegistrostudiantePageState extends State<RegistrostudiantePage> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 40.0),
+                            padding: const EdgeInsets.only(top: 20.0),
                           ),
                           MaterialButton(
                             shape: RoundedRectangleBorder(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:subsidios/Bloc/usuario_bloc.dart';
 import 'package:subsidios/Model/usuario.dart';
 import 'package:subsidios/navigator.dart';
 import 'package:subsidios/resource/constantes.dart';
@@ -11,10 +12,11 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _autovalidate = false;
+  bool _validate;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final InicioSesionBloc inicioSesionBloc = InicioSesionBloc();
 
-
-Usuario _usuario = Usuario(
+Usuario _login = Usuario(
   correo: '',
   password: '',
 );
@@ -27,6 +29,21 @@ Usuario _usuario = Usuario(
     _scaffoldKey.currentState.showSnackBar(SnackBar(
       content: Text(value),
     ));
+  }
+
+
+  void _handleSubmitted() async {
+    final FormState form = _formKey.currentState;
+    if (!form.validate()) {
+      _autovalidate = true;
+      showInSnackBar('corregir');
+    } else {
+      form.save();
+        _validate = await inicioSesionBloc.iniciarSesion(_login);
+      if(_validate){
+        SubNavigator.goToHomeAdmin(context);
+      }
+    }
   }
 
   @override
@@ -109,7 +126,7 @@ Usuario _usuario = Usuario(
                                                       .emailAddress,
                                                   maxLength: 20,
                                                   onSaved: (String value) {
-                                                    _usuario.correo = value;
+                                                    _login.correo = value;
                                                   },
                                                   style:
                                                       TextStyle(fontSize: 18.0),
@@ -129,7 +146,7 @@ Usuario _usuario = Usuario(
                                                           )),
                                                   maxLength: 8,
                                                   onSaved: (String value) {
-                                                    _usuario.password = value;
+                                                    _login.password = value;
                                                   },
                                                   style:
                                                       TextStyle(fontSize: 18.0),
@@ -137,7 +154,7 @@ Usuario _usuario = Usuario(
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                          top: 40.0),
+                                                          top: 20.0),
                                                 ),
                                                 MaterialButton(
                                                     shape:
@@ -154,7 +171,7 @@ Usuario _usuario = Usuario(
                                                     textColor: Colors.white,
                                                     child: Text(
                                                         Constants.btnIngresar),
-                                                    onPressed:(){SubNavigator.goToHomeAdmin(context);}
+                                                    onPressed:_handleSubmitted
                                                         
                                                   ),
                                               ],

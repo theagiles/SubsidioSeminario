@@ -11,4 +11,16 @@ class SubNavigator {
   static void goToHomeAdmin(BuildContext context) {
     Navigator.pushNamed(context, Constants.menuRoute);
   }
+
+  static void goToListaEstudiante(BuildContext context) {
+    Navigator.pushNamed(context, Constants.listaEstudianteRoute);
+  }
+
+  static void goToRegistroEstudiante(BuildContext context) {
+    Navigator.pushNamed(context, Constants.registroEstudianteRoute);
+  }
+
+  static void goToBuscarEstudiante(BuildContext context) {
+    Navigator.pushNamed(context, Constants.buscarEstudianteRoute);
+  }
 }

@@ -1,15 +1,14 @@
-import 'package:subsidios/Model/estrato.dart';
 
 class Estudiante {
   int idEstudiante;
   String nombre;
   String apellido;
   String identificacion;
-  String grado;
+  int grado;
   String barrio;
-  String usuario;
+  int estrato;
+  String email;
   String password;
-  Estrato estrato;
 
   
   Estudiante({
@@ -19,9 +18,9 @@ class Estudiante {
       this.identificacion,
       this.grado,
       this.barrio,
-      this.usuario,
-      this.password,
-      this.estrato
+      this.estrato,
+      this.email,
+      this.password
       });
 
   factory Estudiante.fromJson(Map<String, dynamic> parsedJson) {
@@ -29,12 +28,12 @@ class Estudiante {
       idEstudiante: parsedJson['id'],
       nombre: parsedJson['nombre'],
       apellido: parsedJson['apellido'],
-      identificacion: parsedJson['identificacion'],
+      identificacion: parsedJson['documento'],
       grado: parsedJson['grado'],
       barrio: parsedJson['barrio'],
-      usuario: parsedJson['usuario'],
-      password: parsedJson['password'],
-      estrato: Estrato.fromJson(parsedJson['estrato'])
+      estrato: parsedJson['estrato'],
+      email: parsedJson['correo'],
+      password: parsedJson['password']
     );
   }
 
@@ -42,11 +41,11 @@ class Estudiante {
         'id': idEstudiante,
         'nombre': nombre,
         'apellido': apellido,
-        'identificacion': identificacion,
+        'documento': identificacion,
         'grado': grado,
         'barrio': barrio,
-        'usuario': usuario,
-        'password': password,
-        'estrato': estrato.toJson(),
+        'estrato': estrato,
+        'correo': email,
+        'password':password
       };
 }

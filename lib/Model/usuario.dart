@@ -12,14 +12,14 @@ class Usuario {
   factory Usuario.fromJson(Map<String, dynamic> parsedJson) {
     return Usuario(
       idUsuario: parsedJson['id'],
-      correo: parsedJson['correo'],
+      correo: parsedJson['email'],
       password: parsedJson['password'],
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': idUsuario,
-        'correo': correo,
+        'email': correo,
         'password': password,
       };
 }

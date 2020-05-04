@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:subsidios/UI/estudiantes/buscar_estudiante.dart';
+import 'package:subsidios/UI/estudiantes/lista_estudiantes.dart';
+import 'package:subsidios/UI/estudiantes/registro_estudiantes.dart';
 import 'package:subsidios/UI/menu.dart';
 import 'package:subsidios/UI/login.dart';
 import 'package:subsidios/resource/constantes.dart';
@@ -16,6 +19,9 @@ class App extends StatelessWidget {
       routes: {
         Constants.homeRoute: (context) => LoginPage(),
         Constants.menuRoute: (context) => MenuPage(),
+        Constants.registroEstudianteRoute: (context) => RegistrostudiantePage(),
+        Constants.listaEstudianteRoute: (context) => ListaEstudiantePage(),
+        Constants.buscarEstudianteRoute: (context) => BuscarEstudiantePage(),
       },
     );
   }
