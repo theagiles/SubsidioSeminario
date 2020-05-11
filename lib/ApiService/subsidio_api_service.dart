@@ -2,16 +2,18 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:subsidios/Model/api_response.dart';
-import 'package:subsidios/Model/estudiante.dart';
+import 'package:subsidios/Model/session.dart';
+import 'package:subsidios/Model/subsidio.dart';
 import 'package:subsidios/resource/constantes.dart';
 
-class EstudianteApiService {
-  Estudiante _estudiante;
-  Future<ApiResponse> insertEstudiante(Estudiante estudiante, String token) async {
+class SubsidioApiService {
+  Subsidio _subsidio;
+  Session _session;
+  Future<ApiResponse> insertSubsidio(Subsidio subsidio, String token) async {
     ApiResponse apiResponse = ApiResponse(statusResponse: 0);
     print("Token generado en api service " + token);
-    var body2 = json.encode(estudiante.toJson());
-    Uri uri = Uri.http(Constants.urlAuthority, Constants.pathServiceInsertEstudiante);
+    var body2 = json.encode(subsidio.toJson());
+    Uri uri = Uri.http(Constants.urlAuthority, Constants.pathServiceInsertSubsidio);
     var res = await http.post(uri,
         headers: {
           HttpHeaders.contentTypeHeader: Constants.contenTypeHeader,
@@ -22,16 +24,16 @@ class EstudianteApiService {
     var resBody = json.decode(res.body);
 
     if (apiResponse.statusResponse == 200) {
-      _estudiante = Estudiante.fromJson(resBody);
-      apiResponse.object = _estudiante;
+      _subsidio = Subsidio.fromJson(resBody);
+      apiResponse.object = _subsidio;
     }
     return apiResponse;
   }
 
-  Future<ApiResponse> listEstudiante(String token) async {
+  Future<ApiResponse> listSubsidio(String token) async {
     ApiResponse apiResponse = ApiResponse(statusResponse: 0);
     Uri uri =
-        Uri.http(Constants.urlAuthority, Constants.pathServiceListEstudiante);
+        Uri.http(Constants.urlAuthority, Constants.pathServiceListSubsidio);
     var res = await http.get(uri,
         headers: {
           HttpHeaders.contentTypeHeader: Constants.contenTypeHeader,
@@ -44,7 +46,7 @@ class EstudianteApiService {
 
     if (apiResponse.statusResponse == 200) {
       resBody['body'].forEach((i) {
-        apiResponse.listEstudiante.add(Estudiante.fromJson(i));
+        apiResponse.listSubsidio.add(Subsidio.fromJson(i));
         return i;
       });
 
@@ -53,30 +55,9 @@ class EstudianteApiService {
     return apiResponse;
   }
 
-  Future<ApiResponse> buscarEstudiante(Estudiante estudiante, String token) async {
+  Future<ApiResponse> deleteSubsidio(Subsidio subsidio, String token) async {
     ApiResponse apiResponse = ApiResponse(statusResponse: 0);
-    //Uri uri = Uri.http(Constants.urlAuthority, Constants.pathServicefindEstudiante, ;
-    var url = Constants.urlAu + Constants.pathServicefindEstudiante+ estudiante.identificacion;
-    print(url);
-    var res = await http.get(url,
-        headers: {HttpHeaders.contentTypeHeader: Constants.contenTypeHeader, 
-        HttpHeaders.authorizationHeader: 'Bearer ' + token});
-    apiResponse.statusResponse = res.statusCode;
-    var resBody = json.decode(res.body);
-    print(resBody);
-
-    if (apiResponse.statusResponse == 200) {
-      _estudiante = Estudiante.fromJson(resBody);
-      apiResponse.object = _estudiante;
-
-    }
-    return apiResponse;
-
-  }
-
-  Future<ApiResponse> deleteEstudiante(Estudiante estudiante, String token) async {
-    ApiResponse apiResponse = ApiResponse(statusResponse: 0);
-    var url = Constants.urlAu + Constants.pathServiceDeleteEstudiante+ estudiante.identificacion;
+    var url = Constants.urlAu + Constants.pathServiceDeleteSubsidio + subsidio.estudiante;
     print(url);
     var res = await http.delete(url,
         headers: {HttpHeaders.contentTypeHeader: Constants.contenTypeHeader, 
@@ -85,12 +66,28 @@ class EstudianteApiService {
     var resBody = json.decode(res.body);
     print(resBody);
 
-    if (apiResponse.statusResponse == 200) {
-      _estudiante = Estudiante.fromJson(resBody);
-      apiResponse.object = _estudiante;
-
-    }
     return apiResponse;
 
   }
+
+  Future<ApiResponse> buscaSubsidio(Subsidio subsidio, String token) async {
+    ApiResponse apiResponse = ApiResponse(statusResponse: 0);
+    var url = Constants.urlAu + Constants.pathServiceBuscarSubsidio + subsidio.estudiante;
+    print(url);
+    var res = await http.get(url,
+        headers: {HttpHeaders.contentTypeHeader: Constants.contenTypeHeader, 
+        HttpHeaders.authorizationHeader: 'Bearer ' + token});
+    apiResponse.statusResponse = res.statusCode;
+    var resBody = json.decode(res.body);
+    print(resBody);
+    apiResponse.mensaje = resBody['mensaje'];
+    print(apiResponse.mensaje);
+    
+    if (apiResponse.statusResponse == 200) {
+      
+      
+
+      }
+      return apiResponse;
+    }
 }

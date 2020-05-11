@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:subsidios/Model/api_response.dart';
 import 'package:subsidios/Model/session.dart';
 import 'package:subsidios/Model/usuario.dart';
 import 'package:subsidios/resource/constantes.dart';
@@ -9,6 +10,7 @@ class LoginApiService {
   LoginApiService();
 
   Session _session;
+  ApiResponse _api;
   Future<Session> iniciarSesion(Usuario usuario) async {
     var body2 = json.encode(usuario.toJson());
     Uri uri = Uri.http(Constants.urlAuthority, Constants.pathServiceLogin);
@@ -18,10 +20,12 @@ class LoginApiService {
 
     var resBody = json.decode(res.body);
     print(res.body);
-    _session = Session.fromJson(resBody);
+    print(resBody['body']);
+    _session = Session.fromJson(resBody['body']);
 
     if (res.statusCode == 200) {
-      print("token " + _session.token);
+      print("Token " + _session.token);
+      print("Rol " + _session.rol);
       return _session;
     }
     return _session;

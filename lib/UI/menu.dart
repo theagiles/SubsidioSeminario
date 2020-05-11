@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:gradient_bottom_navigation_bar/gradient_bottom_navigation_bar.dart';
 import 'package:subsidios/UI/estudiantes/lista_estudiantes.dart';
 import 'package:subsidios/UI/home.dart';
+import 'package:subsidios/UI/reportes/lista_reportes.dart';
+import 'package:subsidios/UI/subsidios/lista_subsidios.dart';
 
 class MenuPage extends StatefulWidget {
   MenuPage({Key key}) : super(key: key);
@@ -15,6 +17,8 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
 
   final ListaEstudiantePage _registro = ListaEstudiantePage();
+  final ListaSubsidioPage _subsidio = ListaSubsidioPage();
+  final ListaReportePage _reporte = ListaReportePage();
   int _selectedIndex = 0;
 
   Widget _homepage = HomePage();
@@ -26,6 +30,12 @@ class _MenuPageState extends State<MenuPage> {
       break;
       case 1:
       return _registro;
+      break;
+      case 2:
+      return _subsidio;
+      break;
+      case 3:
+      return _reporte;
       break;
       default:
       return Container(
@@ -49,7 +59,8 @@ class _MenuPageState extends State<MenuPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('')),
           BottomNavigationBarItem(icon: Icon(Icons.person), title: Text('')),
-          BottomNavigationBarItem(icon: Icon(Icons.toc), title: Text('')),
+          BottomNavigationBarItem(icon: Icon(Icons.attach_money), title: Text('')),
+          BottomNavigationBarItem(icon: Icon(Icons.list), title: Text('')),
         ],
         currentIndex: _selectedIndex,
         onTap: (int tappedIndex) {

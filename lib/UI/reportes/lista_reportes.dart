@@ -1,34 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:subsidios/Bloc/estudiante_bloc.dart';
+import 'package:subsidios/Bloc/reporte_bloc.dart';
 import 'package:subsidios/Model/api_response.dart';
-import 'package:subsidios/Model/estudiante.dart';
-import 'package:subsidios/UI/estudiantes/actualizar_estudiante.dart';
+import 'package:subsidios/Model/reporte.dart';
+import 'package:subsidios/UI/reportes/actualizar_reporte.dart';
 import 'package:subsidios/navigator.dart';
 import 'package:subsidios/resource/constantes.dart';
 
-class ListaEstudiantePage extends StatefulWidget {
-  final Estudiante estudiante;
-  const ListaEstudiantePage({Key key, this.estudiante}) : super(key: key);
+class ListaReportePage extends StatefulWidget {
+  final Reporte reporte;
+  const ListaReportePage({Key key, this.reporte}) : super(key: key);
 
   @override
-  _ListaEstudiantePageState createState() => _ListaEstudiantePageState();
+  _ListaReportePageState createState() => _ListaReportePageState();
 }
 
-class _ListaEstudiantePageState extends State<ListaEstudiantePage>
+class _ListaReportePageState extends State<ListaReportePage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Estudiante estudiante;
-  final EstudianteBloc estudianteBloc = EstudianteBloc();
+  Reporte reporte;
+  final ReporteBloc reporteBloc = ReporteBloc();
   ApiResponse apiResponse;
 
-  List<Estudiante> listEstudiante = List();
+  List<Reporte> listReporte = List();
 
   _handleSubmitted() {
-    estudianteBloc.listarEstudiante().then((apiResponse) {
+    reporteBloc.listarReporte().then((apiResponse) {
       setState(() {
-        listEstudiante = apiResponse.listEstudiante;
+        listReporte = apiResponse.listReporte;
       });
     });
   }
@@ -36,7 +36,7 @@ class _ListaEstudiantePageState extends State<ListaEstudiantePage>
   @override
   void initState() {
     super.initState();
-    EstudianteBloc();
+    ReporteBloc();
     _handleSubmitted();
   }
 
@@ -45,18 +45,18 @@ class _ListaEstudiantePageState extends State<ListaEstudiantePage>
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text(Constants.listaEstudiantes),
+        title: const Text(Constants.listareporte),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.person_add),
+            icon: Icon(Icons.add),
             onPressed: () {
-              SubNavigator.goToRegistroEstudiante(context);
+              SubNavigator.goToRegistroReporte(context);
             },
           ),
           IconButton(
               icon: Icon(Icons.delete),
               onPressed: () {
-                SubNavigator.goToBuscarEstudiante(context);
+                SubNavigator.goToEliminarReporte(context);
               })
         ],
       ),
@@ -65,7 +65,7 @@ class _ListaEstudiantePageState extends State<ListaEstudiantePage>
           child: ListView.builder(
             shrinkWrap: true,
             padding: const EdgeInsets.all(15.0),
-            itemCount: listEstudiante.length,
+            itemCount: listReporte.length,
             itemBuilder: (BuildContext context, int indice) {
               return Card(
                 color: Colors.blueGrey[indice],
@@ -73,23 +73,23 @@ class _ListaEstudiantePageState extends State<ListaEstudiantePage>
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     ListTile(
-                      title: Text("Estudiante: " + listEstudiante[indice].nombre,
+                      title: Text("Reporte: " + listReporte[indice].fecha,
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.black87,
                               fontWeight: FontWeight.bold)),
-                      subtitle: Text(listEstudiante[indice].email),
-                      leading: Icon(Icons.person),
+                      subtitle: Text(listReporte[indice].descripcion),
+                      leading: Icon(Icons.attach_money),
                       onTap: () {
-                        print(listEstudiante[indice].nombre);
-                        estudiante = listEstudiante[indice];
+                        print(listReporte[indice].fecha);
+                        reporte = listReporte[indice];
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    ActualizarEstudiantePage(
-                                      estudiante: estudiante,
-                                    )));
+                                    ActualizarReportePage(
+                                      reporte: reporte)
+                                    ));
                       },
                     ),
                   ],

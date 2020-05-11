@@ -23,4 +23,32 @@ class SubNavigator {
   static void goToBuscarEstudiante(BuildContext context) {
     Navigator.pushNamed(context, Constants.buscarEstudianteRoute);
   }
+
+  static void goToGrafico(BuildContext context) {
+    Navigator.pushNamed(context, Constants.graficoRoute);
+  }
+
+  static void goToRegistroSubsidio(BuildContext context) {
+    Navigator.pushNamed(context, Constants.registroSubsidioRoute);
+  }
+
+  static void goToListaSubsidio(BuildContext context) {
+    Navigator.pushNamed(context, Constants.listaSubsidioRoute);
+  }
+
+  static void goToEliminarSubsidio(BuildContext context) {
+    Navigator.pushNamed(context, Constants.eliminarSubsidioRoute);
+  }
+
+  static void goToRegistroReporte(BuildContext context) {
+    Navigator.pushNamed(context, Constants.registroReporteRoute);
+  }
+
+  static void goToListaReporte(BuildContext context) {
+    Navigator.pushNamed(context, Constants.listaReporteRoute);
+  }
+
+  static void goToEliminarReporte(BuildContext context) {
+    Navigator.pushNamed(context, Constants.eliminarReporteRoute);
+  }
 }

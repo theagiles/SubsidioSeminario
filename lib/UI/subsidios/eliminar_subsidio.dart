@@ -1,38 +1,59 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:subsidios/Bloc/estudiante_bloc.dart';
-import 'package:subsidios/Model/estudiante.dart';
+import 'package:subsidios/Bloc/subsidio_bloc.dart';
+import 'package:subsidios/Model/subsidio.dart';
+import 'package:subsidios/navigator.dart';
 import 'package:subsidios/resource/constantes.dart';
 
-class BuscarEstudiantePage extends StatefulWidget {
-  BuscarEstudiantePage({Key key}) : super(key: key);
+class EliminarSubsidioPage extends StatefulWidget {
+  EliminarSubsidioPage({Key key}) : super(key: key);
 
   @override
-  _BuscarEstudiantePageState createState() => _BuscarEstudiantePageState();
+  _EliminarSubsidioPageState createState() => _EliminarSubsidioPageState();
 }
 
-class _BuscarEstudiantePageState extends State<BuscarEstudiantePage> {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _EliminarSubsidioPageState extends State<EliminarSubsidioPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _autovalidate = false;
-  final EstudianteBloc estudianteBloc = EstudianteBloc();
-  Estudiante _estudiante = Estudiante(
-    identificacion: ''
+  final SubsidioBloc subsidioBloc = SubsidioBloc();
+  Subsidio _subsidio = Subsidio(
+    estudiante: ''
   );
-  void showInSnackBar(String value) {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(value),
-    ));
+  showDeleteDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            title:
+                Row(children: [Icon(Icons.info), Text(Constants.tittleDialog)]),
+            content: Text(Constants.eliminado),
+            actions: <Widget>[
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                ),
+                child: Text(
+                  Constants.btnCerrar,
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Color(0xFFD32F2F),
+                padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                onPressed: () {SubNavigator.goToListaSubsidio(context);},
+              )
+            ],
+          );
+        });
   }
   void _handleSubmitted() {
-    print("estudiante a buscar + ${_estudiante.identificacion}");
+    print("subsidio a eliminar + ${_subsidio.estudiante}");
     final FormState form = _formKey.currentState;
     if (!form.validate()) {
       _autovalidate = true;
     } else {
       form.save();
-      estudianteBloc..findEstudiante(_estudiante);
-      showInSnackBar('Registro Exitoso');
+      subsidioBloc.deleteSubsidio(_subsidio);
+      showDeleteDialog(context);
     }
   }
 
@@ -41,7 +62,7 @@ class _BuscarEstudiantePageState extends State<BuscarEstudiantePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text(Constants.buscarEstudiante),
+        title: const Text(Constants.eliminarSubsidio),
         
       ),
       body: Stack(fit: StackFit.expand, children: <Widget>[
@@ -72,15 +93,15 @@ class _BuscarEstudiantePageState extends State<BuscarEstudiantePage> {
                           const SizedBox(height: 12.0),
                           TextFormField(
                             decoration: InputDecoration(
-                                labelText: Constants.labelDocumento,
+                                labelText: Constants.labelEstudiante,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20.0)),
-                                icon: Icon(Icons.create)),
+                                icon: Icon(Icons.person)),
                                 maxLength: 10,
                             validator: validateNumeros,
                             keyboardType: TextInputType.number,
                             onSaved: (String value) {
-                              _estudiante.identificacion = value;
+                              _subsidio.estudiante = value;
                             },
                             style: TextStyle(fontSize: 18.0),
                           ),
@@ -97,7 +118,7 @@ class _BuscarEstudiantePageState extends State<BuscarEstudiantePage> {
                             color: Color(0xFFD32F2F),
                             splashColor: Colors.red,
                             textColor: Colors.white,
-                            child: Text(Constants.btnBuscar),
+                            child: Text(Constants.btnEliminar),
                             onPressed: _handleSubmitted
                           ),
                         ],

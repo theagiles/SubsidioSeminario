@@ -23,4 +23,9 @@ class InicioSesionBloc {
     }
       return _access;
   }
+
+  Future cerrarSesion()async{
+    await _repository.deleteAll();
+    
+  }
 }

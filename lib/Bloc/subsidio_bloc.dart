@@ -1,17 +1,17 @@
 import 'package:subsidios/Model/api_response.dart';
-import 'package:subsidios/Model/estudiante.dart';
+import 'package:subsidios/Model/subsidio.dart';
 import 'package:subsidios/Repository/repository.dart';
 import 'package:subsidios/resource/constantes.dart';
 
-class EstudianteBloc {
+class SubsidioBloc {
   final Repository _repository = Repository();
   var _apiResponse = ApiResponse();
 
   ApiResponse get apiResponse => _apiResponse;
 
-  Future<ApiResponse> createEstudiante(Estudiante estudiante) async {
+  Future<ApiResponse> createSubsidio(Subsidio subsidio) async {
     String token = await _repository.getLocalAccessToken();
-    ApiResponse apiResponse = await _repository.registrarEstudiante(estudiante, token);
+    ApiResponse apiResponse = await _repository.registrarSubsidio(subsidio, token);
     if (apiResponse.statusResponse == 200) {
       apiResponse.message = Constants.createMessage;
       print(apiResponse.message);
@@ -23,9 +23,9 @@ class EstudianteBloc {
     }
     return apiResponse;
   }
-  Future<ApiResponse> listarEstudiante() async {
+  Future<ApiResponse> listarSubsidio() async {
     String token = await _repository.getLocalAccessToken();
-    ApiResponse apiResponse = await _repository.listaEstudiante(token);
+    ApiResponse apiResponse = await _repository.listaSubsidio(token);
     if (apiResponse.statusResponse == 200) {
       apiResponse.message = Constants.createMessage;
       print(apiResponse.message);
@@ -38,9 +38,10 @@ class EstudianteBloc {
       return apiResponse;
     }
   }
-  Future<ApiResponse> findEstudiante(Estudiante estudiante) async {
+
+  Future<ApiResponse> deleteSubsidio(Subsidio subsidio) async {
     String token = await _repository.getLocalAccessToken();
-    ApiResponse apiResponse = await _repository.buscarEstudiante(estudiante, token);
+    ApiResponse apiResponse = await _repository.eliminarSubsidio(subsidio, token);
     if (apiResponse.statusResponse == 200) {
       apiResponse.message = Constants.createMessage;
       print(apiResponse.message);
@@ -53,9 +54,9 @@ class EstudianteBloc {
     return apiResponse;
   }
 
-  Future<ApiResponse> deleteEstudiante(Estudiante estudiante) async {
+  Future<ApiResponse> buscaSubsidio(Subsidio subsidio) async {
     String token = await _repository.getLocalAccessToken();
-    ApiResponse apiResponse = await _repository.eliminarEstudiante(estudiante, token);
+    ApiResponse apiResponse = await _repository.buscarSubsidio(subsidio, token);
     if (apiResponse.statusResponse == 200) {
       apiResponse.message = Constants.createMessage;
       print(apiResponse.message);

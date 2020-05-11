@@ -1,17 +1,17 @@
 import 'package:subsidios/Model/api_response.dart';
-import 'package:subsidios/Model/estudiante.dart';
+import 'package:subsidios/Model/reporte.dart';
 import 'package:subsidios/Repository/repository.dart';
 import 'package:subsidios/resource/constantes.dart';
 
-class EstudianteBloc {
+class ReporteBloc {
   final Repository _repository = Repository();
   var _apiResponse = ApiResponse();
 
   ApiResponse get apiResponse => _apiResponse;
 
-  Future<ApiResponse> createEstudiante(Estudiante estudiante) async {
+  Future<ApiResponse> createReporte(Reporte reporte) async {
     String token = await _repository.getLocalAccessToken();
-    ApiResponse apiResponse = await _repository.registrarEstudiante(estudiante, token);
+    ApiResponse apiResponse = await _repository.registrarReporte(reporte, token);
     if (apiResponse.statusResponse == 200) {
       apiResponse.message = Constants.createMessage;
       print(apiResponse.message);
@@ -23,9 +23,9 @@ class EstudianteBloc {
     }
     return apiResponse;
   }
-  Future<ApiResponse> listarEstudiante() async {
+  Future<ApiResponse> listarReporte() async {
     String token = await _repository.getLocalAccessToken();
-    ApiResponse apiResponse = await _repository.listaEstudiante(token);
+    ApiResponse apiResponse = await _repository.listaReporte(token);
     if (apiResponse.statusResponse == 200) {
       apiResponse.message = Constants.createMessage;
       print(apiResponse.message);
@@ -37,25 +37,11 @@ class EstudianteBloc {
           apiResponse.message);
       return apiResponse;
     }
-  }
-  Future<ApiResponse> findEstudiante(Estudiante estudiante) async {
-    String token = await _repository.getLocalAccessToken();
-    ApiResponse apiResponse = await _repository.buscarEstudiante(estudiante, token);
-    if (apiResponse.statusResponse == 200) {
-      apiResponse.message = Constants.createMessage;
-      print(apiResponse.message);
-    } else {
-      print("el código del error" +
-          apiResponse.statusResponse.toString() +
-          " El mensaje de error es: " +
-          apiResponse.message);
-    }
-    return apiResponse;
   }
 
-  Future<ApiResponse> deleteEstudiante(Estudiante estudiante) async {
+  Future<ApiResponse> deleteReporte(Reporte reporte) async {
     String token = await _repository.getLocalAccessToken();
-    ApiResponse apiResponse = await _repository.eliminarEstudiante(estudiante, token);
+    ApiResponse apiResponse = await _repository.eliminarReporte(reporte, token);
     if (apiResponse.statusResponse == 200) {
       apiResponse.message = Constants.createMessage;
       print(apiResponse.message);

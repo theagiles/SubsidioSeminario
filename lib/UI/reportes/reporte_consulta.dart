@@ -1,54 +1,32 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:subsidios/Bloc/usuario_bloc.dart';
-import 'package:subsidios/Model/usuario.dart';
-import 'package:subsidios/Repository/repository.dart';
 import 'package:subsidios/navigator.dart';
-import 'package:subsidios/navigator_estudiante.dart';
 import 'package:subsidios/resource/constantes.dart';
 
-class LoginPage extends StatefulWidget {
+class ReporteConsultaPage extends StatefulWidget {
   @override
-  LoginPageState createState() => LoginPageState();
+  ReporteConsultaPageState createState() => ReporteConsultaPageState();
 }
-
-class LoginPageState extends State<LoginPage>
-    with SingleTickerProviderStateMixin {
+class ReporteConsultaPageState extends State<ReporteConsultaPage> with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _autovalidate = false;
   bool _validate;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final InicioSesionBloc inicioSesionBloc = InicioSesionBloc();
 
-  Usuario _login = Usuario(
-    correo: '',
-    password: '',
-  );
   @override
   void initState() {
     super.initState();
   }
 
-  void showInSnackBar(String value) {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(value),
-    ));
-  }
-
   void _handleSubmitted() async {
-    final Repository _repository = Repository();
     final FormState form = _formKey.currentState;
     if (!form.validate()) {
       _autovalidate = true;
-      showInSnackBar('corregir');
     } else {
       form.save();
-      _validate = await inicioSesionBloc.iniciarSesion(_login);
-      String rol = await _repository.getLocalRol();
-      if (_validate && rol == "Administrador") {
-        SubNavigator.goToHomeAdmin(context);
-      } else if (rol == "Estudiante") {
-        EstudNavigator.goToHomeEstudiante(context);
+      if(_validate){
+        SubNavigator.goToGrafico(context);
       }
     }
   }
@@ -59,7 +37,7 @@ class LoginPageState extends State<LoginPage>
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: const Text(Constants.appName),
+          title: const Text(Constants.reporteConsulta),
         ),
         body: Container(
             width: size.width,
@@ -71,31 +49,6 @@ class LoginPageState extends State<LoginPage>
                       child: Container(
                           width: size.width,
                           child: Column(
-                            children: <Widget>[
-                              Column(
-                                children: <Widget>[
-                                  Container(
-                                    width: 90,
-                                    margin:
-                                        EdgeInsets.only(top: size.width * 0.2),
-                                    height: 90,
-                                    decoration: BoxDecoration(
-                                        image: const DecorationImage(
-                                          image: NetworkImage(
-                                              Constants.loginImage2),
-                                        ),
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(15),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black,
-                                              blurRadius: 25)
-                                        ]),
-                                  ),
-                                  SizedBox(height: 30)
-                                ],
-                              ),
-                              Column(
                                 children: <Widget>[
                                   Center(
                                     child: SingleChildScrollView(
@@ -120,22 +73,20 @@ class LoginPageState extends State<LoginPage>
                                                 const SizedBox(height: 12.0),
                                                 TextFormField(
                                                   decoration: InputDecoration(
-                                                      hintText: Constants
-                                                          .labelUsuario,
-                                                      icon: Icon(Icons.mail,
-                                                          color: Colors.grey),
-                                                      labelText: Constants
-                                                          .labelUsuario,
-                                                      border: OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      20.0))),
+                                                    hintText:
+                                                        Constants.labelUsuario,
+                                                    icon: Icon(Icons.mail,
+                                                        color: Colors.grey),
+                                                    labelText:
+                                                        Constants.labelUsuario,
+                                                  border: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.circular(20.0)
+                                                  )),
                                                   keyboardType: TextInputType
                                                       .emailAddress,
-                                                  maxLength: 40,
+                                                  maxLength: 20,
                                                   onSaved: (String value) {
-                                                    _login.correo = value;
+                                                    //_login.correo = value;
                                                   },
                                                   style:
                                                       TextStyle(fontSize: 18.0),
@@ -150,14 +101,12 @@ class LoginPageState extends State<LoginPage>
                                                           color: Colors.grey),
                                                       labelText: Constants
                                                           .labelPassword,
-                                                      border: OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      20.0))),
+                                                          border: OutlineInputBorder(
+                                                          borderRadius: BorderRadius.circular(20.0)
+                                                          )),
                                                   maxLength: 8,
                                                   onSaved: (String value) {
-                                                    _login.password = value;
+                                                    //_login.password = value;
                                                   },
                                                   style:
                                                       TextStyle(fontSize: 18.0),
@@ -181,9 +130,10 @@ class LoginPageState extends State<LoginPage>
                                                     splashColor: Colors.red,
                                                     textColor: Colors.white,
                                                     child: Text(
-                                                        Constants.btnIngresar),
-                                                    onPressed:
-                                                        _handleSubmitted),
+                                                        Constants.btnBuscar),
+                                                    onPressed:() {SubNavigator.goToGrafico(context);}
+                                                        
+                                                  ),
                                               ],
                                             ),
                                           ),
@@ -193,8 +143,7 @@ class LoginPageState extends State<LoginPage>
                                   )
                                 ],
                               )
-                            ],
-                          ))),
+                          ))
                 )
               ],
             )));

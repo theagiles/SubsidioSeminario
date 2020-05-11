@@ -87,6 +87,7 @@ class _ActualizarEstudiantePageState extends State<ActualizarEstudiantePage>
           child: Container(
             child: Theme(
               data: ThemeData(
+                hintColor: Colors.red,
                   brightness: Brightness.light,
                   inputDecorationTheme: InputDecorationTheme(
                     labelStyle: TextStyle(color: Colors.black, fontSize: 18.0),
