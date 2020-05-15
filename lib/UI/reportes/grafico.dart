@@ -1,44 +1,3 @@
-/*import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:subsidios/resource/constantes.dart';
-
-class GraficoPage extends StatefulWidget {
-  @override
-  GraficoPageState createState() => GraficoPageState();
-}
-class GraficoPageState extends State<GraficoPage> with SingleTickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _autovalidate = false;
-  bool _validate;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void _handleSubmitted() async {
-    final FormState form = _formKey.currentState;
-    if (!form.validate()) {
-      _autovalidate = true;
-    } else {
-      form.save();
-      if(_validate){
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          title: const Text(Constants.grafico),
-        ),
-        body: Container(
-            ));
-  }
-}*/
 
 import 'dart:math';
 
@@ -85,7 +44,7 @@ class SimpleBarChart extends StatefulWidget {
     return charts.BarChart(
       seriesList,
       animate: true,
-      vertical: false,
+      vertical: true,
     );
   }
 

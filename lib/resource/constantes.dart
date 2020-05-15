@@ -9,6 +9,7 @@ class Constants{
   static const String registroReporte = "Registro de Reporte";
   static const String eliminarReporte = "Eliminar Reporte"; 
   static const String actualizarReporte = "Actualizar Reporte"; 
+  static const String actualizarSubsidio = "Actualizar Subsidio"; 
   static const String actualizar = "Actualizar Estudiante"; 
   static const String eliminarEstudiante = "Eliminar Estudiante"; 
   static const String eliminarSubsidio = "Eliminar Subsidio"; 
@@ -28,7 +29,7 @@ class Constants{
   static const String pathServiceListEstudiante = "/findAllEstudiantes";
   static const String pathServicefindEstudiante = "/findEstudiante/";
   static const String pathServiceDeleteEstudiante = "/deleteEstudiante/";
-  static const String pathServiceInsertSubsidio = "/saveSubsidio";
+  static const String pathServiceInsertSubsidio = "/consultaSubsidio";
   static const String pathServiceListSubsidio = "/findAllSubsidios";
   static const String pathServiceDeleteSubsidio = "/deleteSubsidio/";
   static const String pathServiceBuscarSubsidio = "/findSubsidio/";

@@ -45,6 +45,14 @@ class _ListaReportePageState extends State<ListaReportePage>
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => {SubNavigator.goToHomeAdmin(context)}
+              );
+            },
+          ),
         title: const Text(Constants.listareporte),
         actions: <Widget>[
           IconButton(

@@ -4,8 +4,8 @@ import 'package:subsidios/ApiService/reporte_api_service.dart';
 import 'package:subsidios/ApiService/subsidio_api_service.dart';
 import 'package:subsidios/ApiService/usuario_api_service.dart';
 import 'package:subsidios/Model/api_response.dart';
+import 'package:subsidios/Model/consulta.dart';
 import 'package:subsidios/Model/estudiante.dart';
-import 'package:subsidios/Model/mensje.dart';
 import 'package:subsidios/Model/reporte.dart';
 import 'package:subsidios/Model/session.dart';
 import 'package:subsidios/Model/subsidio.dart';
@@ -43,6 +43,8 @@ class Repository {
   subsidioApiService.deleteSubsidio(subsidio, token);
     Future<ApiResponse> buscarSubsidio(Subsidio subsidio, String token) => 
   subsidioApiService.buscaSubsidio(subsidio, token);
+    Future<ApiResponse> numeroDeConsultas(Consulta consulta, String token) => 
+  subsidioApiService.numeroConsultas(consulta, token);
   //Reporte
   Future<ApiResponse> registrarReporte(Reporte reporte, String token) => 
   reporteApiService.insertReporte(reporte, token);

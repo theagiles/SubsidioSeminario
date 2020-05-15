@@ -76,7 +76,7 @@ class EstudianteApiService {
 
   Future<ApiResponse> deleteEstudiante(Estudiante estudiante, String token) async {
     ApiResponse apiResponse = ApiResponse(statusResponse: 0);
-    var url = Constants.urlAu + Constants.pathServiceDeleteEstudiante+ estudiante.identificacion;
+    var url = Constants.urlAu + Constants.pathServiceDeleteEstudiante + estudiante.identificacion;
     print(url);
     var res = await http.delete(url,
         headers: {HttpHeaders.contentTypeHeader: Constants.contenTypeHeader, 

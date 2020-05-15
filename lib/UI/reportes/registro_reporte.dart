@@ -99,7 +99,15 @@ class _RegistroReportePageState extends State<RegistroReportePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text(Constants.registroReporte)
+        title: const Text(Constants.registroReporte),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.blur_circular),
+            onPressed: () {
+              SubNavigator.goToGrafico(context);
+            },
+          ),
+        ],
       ),
       body: Stack(fit: StackFit.expand, children: <Widget>[
         Center(
@@ -143,7 +151,8 @@ class _RegistroReportePageState extends State<RegistroReportePage> {
                                 FocusScope.of(context)
                                     .requestFocus(FocusNode());
                                 _selectDate(context);
-                              }),
+                              }
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
                           ),

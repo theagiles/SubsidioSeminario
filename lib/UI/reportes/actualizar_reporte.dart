@@ -40,6 +40,7 @@ class _ActualizarReportePageState extends State<ActualizarReportePage> {
       });
     });
     super.initState();
+    _inputDate = TextEditingController(text: reporte.fecha); 
     ReporteBloc();
   }
 
@@ -130,7 +131,6 @@ class _ActualizarReportePageState extends State<ActualizarReportePage> {
                           ),
                           const SizedBox(height: 12.0),
                           TextField(
-                            
                               enableInteractiveSelection: false,
                               controller: _inputDate,
                               decoration: InputDecoration(

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:subsidios/Model/api_response.dart';
 import 'package:subsidios/Model/session.dart';
 import 'package:subsidios/Model/usuario.dart';
 import 'package:subsidios/resource/constantes.dart';
@@ -10,7 +9,6 @@ class LoginApiService {
   LoginApiService();
 
   Session _session;
-  ApiResponse _api;
   Future<Session> iniciarSesion(Usuario usuario) async {
     var body2 = json.encode(usuario.toJson());
     Uri uri = Uri.http(Constants.urlAuthority, Constants.pathServiceLogin);

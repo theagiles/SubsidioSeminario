@@ -46,6 +46,14 @@ class _ListaSubsidioPageState extends State<ListaSubsidioPage>
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => {SubNavigator.goToHomeAdmin(context)}
+              );
+            },
+          ),
         title: const Text(Constants.listaSubsidio),
         actions: <Widget>[
           IconButton(
@@ -74,7 +82,7 @@ class _ListaSubsidioPageState extends State<ListaSubsidioPage>
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     ListTile(
-                      title: Text("Subsidio: " + listSubsidio[indice].valor.toString(),
+                      title: Text("Subsidio: " + listSubsidio[indice].estudiante,
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.black87,

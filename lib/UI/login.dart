@@ -29,18 +29,12 @@ class LoginPageState extends State<LoginPage>
     super.initState();
   }
 
-  void showInSnackBar(String value) {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text(value),
-    ));
-  }
 
   void _handleSubmitted() async {
     final Repository _repository = Repository();
     final FormState form = _formKey.currentState;
     if (!form.validate()) {
       _autovalidate = true;
-      showInSnackBar('corregir');
     } else {
       form.save();
       _validate = await inicioSesionBloc.iniciarSesion(_login);

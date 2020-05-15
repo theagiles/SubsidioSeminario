@@ -41,6 +41,7 @@ class _ActualizarSubsidioPageState extends State<ActualizarSubsidioPage> {
       });
     });
     super.initState();
+    _inputDate = TextEditingController(text: subsidio.fecha); 
     SubsidioBloc();
   }
 
@@ -101,7 +102,7 @@ class _ActualizarSubsidioPageState extends State<ActualizarSubsidioPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text(Constants.registro,)
+        title: const Text(Constants.actualizarSubsidio)
       ),
       body: Stack(fit: StackFit.expand, children: <Widget>[
         Center(
@@ -222,7 +223,7 @@ class _ActualizarSubsidioPageState extends State<ActualizarSubsidioPage> {
                             color: Color(0xFFD32F2F),
                             splashColor: Colors.red,
                             textColor: Colors.white,
-                            child: Text(Constants.btnRegistrar),
+                            child: Text(Constants.btnModificar),
                             onPressed: _handleSubmitted
                           ),
                         ],

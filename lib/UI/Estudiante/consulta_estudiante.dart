@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:subsidios/Bloc/subsidio_bloc.dart';
 import 'package:subsidios/Model/subsidio.dart';
-import 'package:subsidios/Repository/repository.dart';
 import 'package:subsidios/navigator_estudiante.dart';
 import 'package:subsidios/resource/constantes.dart';
 
@@ -17,7 +16,6 @@ class _ConsultaEstudiantePageState extends State<ConsultaEstudiantePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _autovalidate = false;
-  bool _validate;
   final SubsidioBloc subsidioBloc = SubsidioBloc();
   Subsidio _subsidio = Subsidio(
     estudiante: ''
