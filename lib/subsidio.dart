@@ -7,7 +7,7 @@ import 'package:subsidios/UI/estudiantes/registro_estudiantes.dart';
 import 'package:subsidios/UI/menu.dart';
 import 'package:subsidios/UI/login.dart';
 import 'package:subsidios/UI/reportes/eliminar_reporte.dart';
-import 'package:subsidios/UI/reportes/grafico.dart';
+import 'package:subsidios/UI/reportes/grafico_consultas.dart';
 import 'package:subsidios/UI/reportes/lista_reportes.dart';
 import 'package:subsidios/UI/reportes/registro_reporte.dart';
 import 'package:subsidios/UI/reportes/reporte_consulta.dart';
@@ -36,7 +36,6 @@ class App extends StatelessWidget {
         Constants.registroEstudianteRoute: (context) => RegistrostudiantePage(),
         Constants.listaEstudianteRoute: (context) => ListaEstudiantePage(),
         Constants.buscarEstudianteRoute: (context) => EliminarEstudiantePage(),
-        //Constants.graficoRoute: (context) => SimpleBarChart(),
         Constants.registroSubsidioRoute: (context) => RegistroSubsidioPage(),
         Constants.listaSubsidioRoute: (context) => ListaSubsidioPage(),
         Constants.eliminarSubsidioRoute: (context) => EliminarSubsidioPage(),

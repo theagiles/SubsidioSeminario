@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:subsidios/Bloc/subsidio_bloc.dart';
 import 'package:subsidios/Model/consulta.dart';
 import 'package:subsidios/Model/respuesta_consulta.dart';
-import 'package:subsidios/UI/reportes/grafico.dart';
+import 'package:subsidios/UI/reportes/grafico_consultas.dart';
+import 'package:subsidios/UI/reportes/grafico_subsidios.dart';
 import 'package:subsidios/resource/constantes.dart';
 
 class ConsultaSubsidiosPage extends StatefulWidget {
@@ -64,7 +65,6 @@ class ConsultaSubsidiosPageState extends State<ConsultaSubsidiosPage>
         listGrafico = apiResponse.listConsulta;
       });
     });
-    //SubNavigator.goToGrafico(context);
   }
 
   @override
@@ -73,7 +73,7 @@ class ConsultaSubsidiosPageState extends State<ConsultaSubsidiosPage>
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text("Consultas"),
+        title: const Text("Consulta de subsidios"),
       ),
       body: Container(
           width: size.width,
@@ -98,7 +98,7 @@ class ConsultaSubsidiosPageState extends State<ConsultaSubsidiosPage>
                                         leading: Icon(Icons.message),
                                         title: Text('Selecciona'),
                                         subtitle: Text(
-                                            'Un rango de fechas por el cual quieras hacer la consulta.'),
+                                            'Un rango de fechas por el cual quieras realizar la consulta.'),
                                       )
                                     ])),
                               ),
@@ -134,7 +134,6 @@ class ConsultaSubsidiosPageState extends State<ConsultaSubsidiosPage>
                                                             BorderRadius
                                                                 .circular(
                                                                     20.0)),
-                                                    suffix: Icon(Icons.create),
                                                     icon: Icon(
                                                         Icons.calendar_today)),
                                                 onTap: () {
@@ -159,7 +158,6 @@ class ConsultaSubsidiosPageState extends State<ConsultaSubsidiosPage>
                                                             BorderRadius
                                                                 .circular(
                                                                     20.0)),
-                                                    suffix: Icon(Icons.create),
                                                     icon: Icon(
                                                         Icons.calendar_today)),
                                                 onTap: () {
@@ -184,7 +182,11 @@ class ConsultaSubsidiosPageState extends State<ConsultaSubsidiosPage>
                                               textColor: Colors.white,
                                               child: Text(Constants.btnBuscar),
                                               onPressed: _handleSubmitted,
-                                            )
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 20.0),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -192,6 +194,46 @@ class ConsultaSubsidiosPageState extends State<ConsultaSubsidiosPage>
                                   ),
                                 ),
                               ),
+                              Center(
+                                child: Card(
+                                    child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                      const ListTile(
+                                        leading: Icon(Icons.list),
+                                        title: Text(
+                                            'Fechas de subsidios realizados a estudiantes: '),
+                                        subtitle: Text(''),
+                                      ),
+                                    ])),
+                              ),
+                              
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                              ),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child:
+                              MaterialButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                ),
+                                height: 40.0,
+                                minWidth: 30.0,
+                                color: Color(0xFF0097A7),
+                                textColor: Colors.white,
+                                child: Text('Mirar Gráfico'),
+                                onPressed:() {Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (BuildContext
+                                                                  context) =>
+                                                              SubSimpleBarChart(
+                                                                listGrafico:
+                                                                    listGrafico,
+                                                              )));},
+                              ),),
                               Center(
                                 child: Container(
                                   child: ListView.builder(
@@ -217,18 +259,8 @@ class ConsultaSubsidiosPageState extends State<ConsultaSubsidiosPage>
                                                     listGrafico[indice]
                                                         .cantidad
                                                         .toString()),
-                                                leading: Icon(Icons
-                                                    .settings_input_antenna),
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (BuildContext
-                                                                  context) =>
-                                                              PSimpleBarChart(
-                                                                listGrafico: listGrafico,
-                                                              )));
-                                                },
+                                                leading: Icon(Icons.done_all),
+                                                onTap: () {},
                                               )
                                             ],
                                           ));

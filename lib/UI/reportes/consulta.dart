@@ -41,7 +41,7 @@ class ConsultaPageState extends State<ConsultaPage>
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
                                       const ListTile(
-                                        leading: Icon(Icons.message),
+                                        leading: Icon(Icons.info),
                                         title: Text('Selecciona'),
                                         subtitle: Text(
                                             'Si desea saber cuantos estudiantes han consultado si son beneficiarios.'),
@@ -90,10 +90,10 @@ class ConsultaPageState extends State<ConsultaPage>
                                                       children: <Widget>[
                                                     const ListTile(
                                                       leading:
-                                                          Icon(Icons.message),
+                                                          Icon(Icons.info),
                                                       title: Text('Selecciona'),
                                                       subtitle: Text(
-                                                          'Si desea saber cuantos subsidios han sido entregados.'),
+                                                          'Si desea saber cuantos subsidios han sido registrados.'),
                                                     )
                                                   ])),
                                             ),
