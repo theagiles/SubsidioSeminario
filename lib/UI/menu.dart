@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:gradient_bottom_navigation_bar/gradient_bottom_navigation_bar.dart';
 import 'package:subsidios/UI/estudiantes/lista_estudiantes.dart';
 import 'package:subsidios/UI/home.dart';
+import 'package:subsidios/UI/reportes/consulta.dart';
 import 'package:subsidios/UI/reportes/lista_reportes.dart';
 import 'package:subsidios/UI/reportes/reporte_consulta.dart';
 import 'package:subsidios/UI/subsidios/lista_subsidios.dart';
@@ -18,7 +19,7 @@ class _MenuPageState extends State<MenuPage> {
   final ListaEstudiantePage _registro = ListaEstudiantePage();
   final ListaSubsidioPage _subsidio = ListaSubsidioPage();
   final ListaReportePage _reporte = ListaReportePage();
-  final ReporteConsultaPage _grafico = ReporteConsultaPage();
+  final ConsultaPage _grafico = ConsultaPage();
   int _selectedIndex = 0;
 
   Widget _homepage = HomePage();

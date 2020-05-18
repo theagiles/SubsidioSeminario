@@ -30,6 +30,7 @@ class Constants{
   static const String pathServicefindEstudiante = "/findEstudiante/";
   static const String pathServiceDeleteEstudiante = "/deleteEstudiante/";
   static const String pathServiceInsertSubsidio = "/consultaSubsidio";
+  static const String pathServiceRegisterSubsidio = "/findAllDatosSubsidios";
   static const String pathServiceListSubsidio = "/findAllSubsidios";
   static const String pathServiceDeleteSubsidio = "/deleteSubsidio/";
   static const String pathServiceBuscarSubsidio = "/findSubsidio/";
@@ -80,7 +81,10 @@ class Constants{
   static const String eliminarReporteRoute = "/eliminar_reporte";
   static const String graficoRoute = "/grafico";
   static const String homeEstudianteRoute = "/home_estudiante";
+  static const String reporteConsultaEstudianteRoute = "/consulta_subsidio";
   static const String consultaDeEstudianteRoute = "/consulta_subsidio";
+  static const String formularioConsultaRoute = "/consulta_form";
+  static const String formularioConsultaSRoute = "/consulta_Subsidos";
   //Mensajes
   static const String registroExitoso = "¡Registro exitoso!";
   static const String tittleDialog = "Información";

@@ -6,12 +6,12 @@ import 'package:subsidios/Model/respuesta_consulta.dart';
 import 'package:subsidios/UI/reportes/grafico.dart';
 import 'package:subsidios/resource/constantes.dart';
 
-class ReporteConsultaPage extends StatefulWidget {
+class ConsultaSubsidiosPage extends StatefulWidget {
   @override
-  ReporteConsultaPageState createState() => ReporteConsultaPageState();
+  ConsultaSubsidiosPageState createState() => ConsultaSubsidiosPageState();
 }
 
-class ReporteConsultaPageState extends State<ReporteConsultaPage>
+class ConsultaSubsidiosPageState extends State<ConsultaSubsidiosPage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _autovalidate = false;
@@ -59,7 +59,7 @@ class ReporteConsultaPageState extends State<ReporteConsultaPage>
   }
 
   void _handleSubmitted() {
-    subsidioBloc.numeroConsultas(_consulta).then((apiResponse) {
+    subsidioBloc.numeroSubsidios(_consulta).then((apiResponse) {
       setState(() {
         listGrafico = apiResponse.listConsulta;
       });
@@ -192,13 +192,6 @@ class ReporteConsultaPageState extends State<ReporteConsultaPage>
                                   ),
                                 ),
                               ),
-                              /*
-                                Center(
-                                  child: Container(
-                                    padding: EdgeInsets.all(35.0),
-                                    child: barChart(),
-                                  ),
-                                ),*/
                               Center(
                                 child: Container(
                                   child: ListView.builder(

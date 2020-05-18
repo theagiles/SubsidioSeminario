@@ -45,6 +45,8 @@ class Repository {
   subsidioApiService.buscaSubsidio(subsidio, token);
     Future<ApiResponse> numeroDeConsultas(Consulta consulta, String token) => 
   subsidioApiService.numeroConsultas(consulta, token);
+    Future<ApiResponse> numeroDeSubsidios(Consulta consulta, String token) => 
+  subsidioApiService.numeroSubsidios(consulta, token);
   //Reporte
   Future<ApiResponse> registrarReporte(Reporte reporte, String token) => 
   reporteApiService.insertReporte(reporte, token);

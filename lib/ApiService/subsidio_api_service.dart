@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:subsidios/Model/api_response.dart';
 import 'package:subsidios/Model/consulta.dart';
+import 'package:subsidios/Model/respuesta_consulta.dart';
 import 'package:subsidios/Model/subsidio.dart';
 import 'package:subsidios/resource/constantes.dart';
 
@@ -112,7 +113,34 @@ class SubsidioApiService {
 
     if (apiResponse.statusResponse == 200) {
         resBody['body'].forEach((i) {
-        apiResponse.listSubsidio.add(Subsidio.fromJson(i));
+        apiResponse.listConsulta.add(RestConsulta.fromJson(i));
+        return i;
+      });
+
+      return apiResponse;
+    }
+    return apiResponse;
+  }
+
+  Future<ApiResponse> numeroSubsidios(Consulta consulta, String token) async {
+    ApiResponse apiResponse = ApiResponse(statusResponse: 0);
+    var body2 = json.encode(consulta.toJson());
+    Uri uri =
+        Uri.http(Constants.urlAuthority, Constants.pathServiceRegisterSubsidio);
+    var res = await http.post(uri,
+        headers: {
+          HttpHeaders.contentTypeHeader: Constants.contenTypeHeader,
+          HttpHeaders.authorizationHeader: 'Bearer ' + token
+        },
+        body: body2);
+
+    apiResponse.statusResponse = res.statusCode;
+    var resBody = json.decode(res.body);
+    print(resBody);
+
+    if (apiResponse.statusResponse == 200) {
+        resBody['body'].forEach((i) {
+        apiResponse.listConsulta.add(RestConsulta.fromJson(i));
         return i;
       });
 

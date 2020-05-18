@@ -10,6 +10,8 @@ import 'package:subsidios/UI/reportes/eliminar_reporte.dart';
 import 'package:subsidios/UI/reportes/grafico.dart';
 import 'package:subsidios/UI/reportes/lista_reportes.dart';
 import 'package:subsidios/UI/reportes/registro_reporte.dart';
+import 'package:subsidios/UI/reportes/reporte_consulta.dart';
+import 'package:subsidios/UI/reportes/subsidios_entregados.dart';
 import 'package:subsidios/UI/subsidios/eliminar_subsidio.dart';
 import 'package:subsidios/UI/subsidios/lista_subsidios.dart';
 import 'package:subsidios/UI/subsidios/registro_subsidio.dart';
@@ -34,7 +36,7 @@ class App extends StatelessWidget {
         Constants.registroEstudianteRoute: (context) => RegistrostudiantePage(),
         Constants.listaEstudianteRoute: (context) => ListaEstudiantePage(),
         Constants.buscarEstudianteRoute: (context) => EliminarEstudiantePage(),
-        Constants.graficoRoute: (context) => SimpleBarChart(),
+        //Constants.graficoRoute: (context) => SimpleBarChart(),
         Constants.registroSubsidioRoute: (context) => RegistroSubsidioPage(),
         Constants.listaSubsidioRoute: (context) => ListaSubsidioPage(),
         Constants.eliminarSubsidioRoute: (context) => EliminarSubsidioPage(),
@@ -42,7 +44,10 @@ class App extends StatelessWidget {
         Constants.listaReporteRoute: (context) => ListaReportePage(),
         Constants.eliminarReporteRoute: (context) => EliminarReportePage(),
         Constants.homeEstudianteRoute: (context) => HomeEstudiantePage(),
-        Constants.consultaDeEstudianteRoute: (context) => ConsultaEstudiantePage()
+        Constants.consultaDeEstudianteRoute: (context) => ConsultaEstudiantePage(),
+        Constants.reporteConsultaEstudianteRoute: (context) => PSimpleBarChart(),
+        Constants.formularioConsultaRoute: (context) => ReporteConsultaPage(),
+        Constants.formularioConsultaSRoute: (context) => ConsultaSubsidiosPage(),
       },
     );
   }

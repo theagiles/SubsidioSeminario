@@ -51,4 +51,16 @@ class SubNavigator {
   static void goToEliminarReporte(BuildContext context) {
     Navigator.pushNamed(context, Constants.eliminarReporteRoute);
   }
+
+  static void goToConsultaEstudiante(BuildContext context) {
+    Navigator.pushNamed(context, Constants.formularioConsultaRoute);
+  }
+
+  static void goToReporteConsultaEstudiante(BuildContext context) {
+    Navigator.pushNamed(context, Constants.reporteConsultaEstudianteRoute);
+  }
+
+  static void goToReporteConsultaSubsidios(BuildContext context) {
+    Navigator.pushNamed(context, Constants.formularioConsultaSRoute);
+  }
 }

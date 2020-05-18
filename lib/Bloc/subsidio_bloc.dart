@@ -84,4 +84,21 @@ class SubsidioBloc {
     }
     return apiResponse;
   }
+
+  Future<ApiResponse> numeroSubsidios(Consulta consulta) async {
+    String token = await _repository.getLocalAccessToken();
+    ApiResponse apiResponse = await _repository.numeroDeSubsidios(consulta, token);
+    if (apiResponse.statusResponse == 200) {
+      apiResponse.message = Constants.createMessage;
+      print(apiResponse.message);
+    } else {
+      print("el código del error" +
+          apiResponse.statusResponse.toString() +
+          " El mensaje de error es: " +
+          apiResponse.message);
+    }
+    return apiResponse;
+  }
+
+
 }

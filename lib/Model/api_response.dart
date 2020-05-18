@@ -1,6 +1,8 @@
 
+import 'package:subsidios/Model/consulta.dart';
 import 'package:subsidios/Model/estudiante.dart';
 import 'package:subsidios/Model/reporte.dart';
+import 'package:subsidios/Model/respuesta_consulta.dart';
 import 'package:subsidios/Model/subsidio.dart';
 
 class ApiResponse {
@@ -23,4 +25,5 @@ class ApiResponse {
   List<Estudiante> listEstudiante = List();
   List<Subsidio> listSubsidio = List();
   List<Reporte> listReporte = List();
+  List<RestConsulta> listConsulta = List();
 }

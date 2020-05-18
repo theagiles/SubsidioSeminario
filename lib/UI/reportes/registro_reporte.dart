@@ -99,15 +99,7 @@ class _RegistroReportePageState extends State<RegistroReportePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text(Constants.registroReporte),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.blur_circular),
-            onPressed: () {
-              SubNavigator.goToGrafico(context);
-            },
-          ),
-        ],
+        title: const Text(Constants.registroReporte)
       ),
       body: Stack(fit: StackFit.expand, children: <Widget>[
         Center(
